@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarGlow Osijek | Profesionalno pranje solarnih panela u Slavoniji</title>
+    <meta name="description" content="Povećajte prinos vaše solarne elektrane. Nudimo stručno čišćenje solarnih panela u Osijeku i okolici. Cijene već od 60€.">
+    <meta name="keywords" content="pranje solarnih panela, solarna energija, Osijek, Slavonija, čišćenje panela, solarne elektrane">
+    <meta name="author" content="SolarGlow Osijek">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SolarGlow Osijek | Profesionalno pranje solarnih panela">
+    <meta property="og:description" content="Povećajte prinos vaše solarne elektrane. Stručno čišćenje u Osijeku i okolici.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="hr_HR">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'solar-blue': '#1A365D',
+                        'solar-yellow': '#F6AD55',
+                        'solar-orange': '#ED8936',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-inter bg-white text-gray-800">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-solar-blue to-solar-yellow rounded-xl flex items-center justify-center">
+                        <i data-lucide="sun" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg text-solar-blue">SolarGlow</span>
+                        <span class="text-sm text-gray-500 block -mt-1">Osijek</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#usluge" class="text-gray-600 hover:text-solar-blue font-medium transition-colors">Usluge</a>
+                    <a href="#cjenik" class="text-gray-600 hover:text-solar-blue font-medium transition-colors">Cjenik</a>
+                    <a href="#kontakt" class="text-gray-600 hover:text-solar-blue font-medium transition-colors">Kontakt</a>
+                    <a href="tel:+3859X XXX XXXX" class="bg-solar-blue text-white px-5 py-2.5 rounded-full font-semibold hover:bg-solar-blue/90 transition-colors flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        Nazovi: 09X XXX XXXX
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-solar-blue">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#usluge" class="block text-gray-600 hover:text-solar-blue font-medium py-2">Usluge</a>
+                <a href="#cjenik" class="block text-gray-600 hover:text-solar-blue font-medium py-2">Cjenik</a>
+                <a href="#kontakt" class="block text-gray-600 hover:text-solar-blue font-medium py-2">Kontakt</a>
+                <a href="tel:+3859X XXX XXXX" class="block bg-solar-blue text-white px-5 py-3 rounded-full font-semibold text-center">
+                    Nazovi: 09X XXX XXXX
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-solar-blue via-solar-blue/95 to-solar-blue/90"></div>
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 right-10 w-96 h-96 bg-solar-yellow rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                        <i data-lucide="zap" class="w-4 h-4 text-solar-yellow"></i>
+                        <span class="text-sm font-medium">Maksimalna energija iz svakog zraka sunca</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                        Vratite snagu svojoj solarnoj elektrani u srcu <span class="text-solar-yellow">Slavonije</span>.
+                    </h1>
+                    
+                    <p class="text-xl text-white/80 mb-8 leading-relaxed">
+                        Profesionalno pranje demineraliziranom vodom povećava učinkovitost vaših panela <strong class="text-solar-yellow">do 30%</strong>. Brzo, sigurno i povoljno u Osijeku i okolici.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#kontakt" class="inline-flex items-center gap-2 bg-solar-yellow text-solar-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-solar-orange transition-colors shadow-lg shadow-solar-yellow/30">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            Besplatna procjena
+                        </a>
+                        <a href="tel:+3859X XXX XXXX" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors border border-white/20">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                            09X XXX XXXX
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-8 mt-12 pt-8 border-t border-white/20">
+                        <div>
+                            <div class="text-3xl font-bold text-solar-yellow">500+</div>
+                            <div class="text-sm text-white/60">Panel-a očišćeno</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-solar-yellow">30%</div>
+                            <div class="text-sm text-white/60">Više energije</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-solar-yellow">5.0 ★</div>
+                            <div class="text-sm text-white/60">Ocjena kupaca</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block relative">
+                    <!-- Placeholder for solar panel image -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                        <div class="aspect-square bg-gradient-to-br from-white/20 to-white/5 rounded-2xl flex items-center justify-center">
+                            <div class="text-center">
+                                <i data-lucide="sun" class="w-32 h-32 text-solar-yellow mx-auto mb-4"></i>
+                                <p class="text-white/60 text-sm">[SLIKA: Solarni paneli na krovu]</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 bg-solar-yellow rounded-full border-2 border-solar-blue"></div>
+                                <div class="w-8 h-8 bg-solar-orange rounded-full border-2 border-solar-blue"></div>
+                                <div class="w-8 h-8 bg-yellow-300 rounded-full border-2 border-solar-blue"></div>
+                            </div>
+                            <p class="text-white/80 text-sm">100+ zadovoljnih klijenata u Osijeku</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem / Solution Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-4">
+                    Zašto prati panele?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Pelud, prašina i ptičji izmet stvaraju barijeru koju kiša ne može isprati
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Problem Card 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="droplets" class="w-7 h-7 text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Pelud i prašina</h3>
+                    <p class="text-gray-600">Mikroskopske čestice talože se na površini i smanjuju propusnost svjetlosti do 20%.</p>
+                </div>
+                
+                <!-- Problem Card 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="bird" class="w-7 h-7 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Ptičji izmet</h3>
+                    <p class="text-gray-600">Kiseline iz ptičjeg izmeta mogu oštetiti zaštitni sloj panela ako se ne ukloni pravovremeno.</p>
+                </div>
+                
+                <!-- Problem Card 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="cloud-rain" class="w-7 h-7 text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Čađa i smog</h3>
+                    <p class="text-gray-600">Industrijske čestice i smog iz zraka talože se i stvaraju trajni sloj koji smanjuje efikasnost.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-gradient-to-r from-solar-blue to-solar-blue/90 rounded-3xl p-8 md:p-12 text-white text-center">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4">
+                    Rješenje: Profesionalno čišćenje demineraliziranom vodom
+                </h3>
+                <p class="text-white/80 text-lg max-w-3xl mx-auto mb-8">
+                    Koristimo posebnu vodu bez minerala koja ne ostavlja tragove i isušuje se bez ostataka. 
+                    Paneli ostaju čisti dulje i rade na maksimalnom kapacitetu.
+                </p>
+                <a href="#kontakt" class="inline-flex items-center gap-2 bg-solar-yellow text-solar-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-solar-orange transition-colors">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    Rezervirajte termin
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="usluge" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-4">
+                    Naše usluge
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Nudimo sveobuhvatno rješenje za održavanje vaših solarnih elektrana
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-2xl w-full h-48 flex items-center justify-center mb-6">
+                        <div class="text-center text-gray-500">
+                            <i data-lucide="sparkles" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                            <p class="text-sm">[SLIKA: Čišćenje panela]</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pranje solarnih panela</h3>
+                    <p class="text-gray-600">Koristimo demineraliziranu vodu i profesionalnu opremu za optimalne rezultate bez oštećenja.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="group">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-2xl w-full h-48 flex items-center justify-center mb-6">
+                        <div class="text-center text-gray-500">
+                            <i data-lucide="check-circle" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                            <p class="text-sm">[SLIKA: Inspekcija drona]</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pregled i inspekcija</h3>
+                    <p class="text-gray-600">Vizualni pregled svih panela uz mogućnost korištenja drona za detaljnu inspekciju krovova.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="group">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-2xl w-full h-48 flex items-center justify-center mb-6">
+                        <div class="text-center text-gray-500">
+                            <i data-lucide="wrench" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                            <p class="text-sm">[SLIKA: Električar]</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Servis elektrike</h3>
+                    <p class="text-gray-600">Provjera i popravak električnih komponenti, kablova i invertera u sustavu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="cjenik" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-4">
+                    Cjenik
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Transparentne cijene bez skrivenih troškova
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- S Paket -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-gray-100 overflow-hidden hover:border-solar-blue transition-colors">
+                    <div class="bg-gray-100 px-6 py-4 text-center">
+                        <span class="inline-block bg-solar-blue text-white text-sm font-bold px-4 py-1 rounded-full">ZA KUĆANSTVA</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-4">S-Paket</h3>
+                        <p class="text-gray-500">do 12 panela</p>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-5xl font-bold text-solar-blue mb-2">60€</div>
+                        <p class="text-gray-500 mb-6">Fiksna cijena</p>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Pranje do 12 panela</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Demineralizirana voda</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Besplatan dolazak (20 km)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Garantirani rezultat</span>
+                            </li>
+                        </ul>
+                        <a href="#kontakt" class="block w-full bg-solar-blue text-white py-3 rounded-full font-semibold hover:bg-solar-blue/90 transition-colors">
+                            Rezerviraj S-Paket
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- M Paket - Popular -->
+                <div class="bg-white rounded-3xl shadow-xl border-4 border-solar-yellow relative overflow-hidden transform md:-translate-y-4">
+                    <div class="absolute top-0 right-0 bg-solar-yellow text-solar-blue text-xs font-bold px-4 py-2 rounded-bl-lg">
+                        NAJPOPULARNIJI
+                    </div>
+                    <div class="bg-gradient-to-r from-solar-yellow to-solar-orange px-6 py-4 text-center">
+                        <h3 class="text-2xl font-bold text-white mt-2">M-Paket</h3>
+                        <p class="text-white/80">13 - 30 panela</p>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-5xl font-bold text-solar-blue mb-2">5€</div>
+                        <p class="text-gray-500 mb-1">po panelu</p>
+                        <p class="text-sm text-gray-400 line-through mb-6">6€ po panelu</p>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Pranje po panelu</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Demineralizirana voda</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Popust na količinu</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Idealno za veće krovove</span>
+                            </li>
+                        </ul>
+                        <a href="#kontakt" class="block w-full bg-solar-yellow text-solar-blue py-3 rounded-full font-bold hover:bg-solar-orange transition-colors">
+                            Rezerviraj M-Paket
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- L Paket -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-gray-100 overflow-hidden hover:border-solar-blue transition-colors">
+                    <div class="bg-gradient-to-r from-solar-blue to-solar-blue/80 px-6 py-4 text-center">
+                        <span class="inline-block bg-white text-solar-blue text-sm font-bold px-4 py-1 rounded-full">OPG & HALE</span>
+                        <h3 class="text-2xl font-bold text-white mt-4">L-Paket</h3>
+                        <p class="text-white/80">30+ panela</p>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-5xl font-bold text-solar-blue mb-2">3.50€</div>
+                        <p class="text-gray-500 mb-6">po panelu</p>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Pranje 30+ panela</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Najbolja cijena</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Za OPG-ove i hale</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Posebni uvjeti</span>
+                            </li>
+                        </ul>
+                        <a href="#kontakt" class="block w-full bg-solar-blue text-white py-3 rounded-full font-semibold hover:bg-solar-blue/90 transition-colors">
+                            Rezerviraj L-Paket
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Free Delivery Notice -->
+            <div class="mt-12 bg-green-50 border border-green-200 rounded-2xl p-6 text-center max-w-3xl mx-auto">
+                <div class="flex items-center justify-center gap-3">
+                    <i data-lucide="truck" class="w-6 h-6 text-green-600"></i>
+                    <p class="text-green-800 font-medium">
+                        <strong>Besplatan dolazak</strong> u krugu od 20 km od Osijeka. 
+                        Za lokacije dalje, molimo nazovite za ponudu.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Local SEO Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-solar-blue to-solar-blue/95 rounded-3xl p-8 md:p-12 text-white">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">
+                            Servisiramo područje cijele Osječko-baranjske županije
+                        </h2>
+                        <p class="text-white/80 text-lg mb-8">
+                            Bez obzira gdje se nalazi vaša solarna elektrana, stići ćemo do vas. 
+                            Od grada do ruralnih područja – slove se našoj stručnoj ekipi.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Osijek</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Čepin</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Đakovo</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Valpovo</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Belišće</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Retfala</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Jug 2</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Nemetin</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Tenja</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Višnjevac</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+                            <div class="text-center text-white/60">
+                                <i data-lucide="map" class="w-16 h-16 mx-auto mb-2 opacity-50"></i>
+                                <p>[KARTA: Područje servisa SolarGlow Osijek]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section id="kontakt" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-6">
+                        Rezervirajte besplatnu procjenu
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Ispunite obrazac i javit ćemo vam se u roku od 24 sata s ponudom prilagođenom vašim potrebama.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Telefon</h4>
+                                <a href="tel:+3859X XXX XXXX" class="text-solar-blue hover:underline">09X XXX XXXX</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Email</h4>
+                                <a href="mailto:info@solarglow-osijek.hr" class="text-solar-blue hover:underline">info@solarglow-osijek.hr</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Lokacija</h4>
+                                <p class="text-gray-600">Osijek, Osječko-baranjska županija</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Radno vrijeme</h4>
+                                <p class="text-gray-600">Pon – Sub: 7:00 – 19:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="ime" class="block text-sm font-medium text-gray-700 mb-2">Ime i prezime *</label>
+                            <input 
+                                type="text" 
+                                id="ime" 
+                                name="ime" 
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                                placeholder="Vaše ime i prezime"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="telefon" class="block text-sm font-medium text-gray-700 mb-2">Telefon *</label>
+                            <input 
+                                type="tel" 
+                                id="telefon" 
+                                name="telefon" 
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                                placeholder="09X XXX XXXX"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                                placeholder="vas@email.com"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="paneli" class="block text-sm font-medium text-gray-700 mb-2">Broj panela *</label>
+                            <select 
+                                id="paneli" 
+                                name="paneli" 
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                            >
+                                <option value="">Odaberite...</option>
+                                <option value="1-12">1-12 panela (S-Paket)</option>
+                                <option value="13-30">13-30 panela (M-Paket)</option>
+                                <option value="31+">31+ panela (L-Paket)</option>
+                                <option value="neznam">Ne znam / Trebam savjet</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="poruka" class="block text-sm font-medium text-gray-700 mb-2">Poruka</label>
+                            <textarea 
+                                id="poruka" 
+                                name="poruka" 
+                                rows="4"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors resize-none"
+                                placeholder="Opišite vašu situaciju, lokaciju, ili postavite pitanje..."
+                            ></textarea>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <input 
+                                type="checkbox" 
+                                id="privola" 
+                                name="privola" 
+                                required
+                                class="mt-1 w-5 h-5 text-solar-blue rounded border-gray-300 focus:ring-solar-blue"
+                            >
+                            <label for="privola" class="text-sm text-gray-600">
+                                Slažem se s obradom osobnih podataka u svrhu kontakta i ponude. *
+                            </label>
+                        </div>
+                        
+                        <button 
+                            type="submit"
+                            class="w-full bg-solar-blue text-white py-4 rounded-xl font-bold text-lg hover:bg-solar-blue/90 transition-colors flex items-center justify-center gap-2"
+                        >
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            Pošalji upit
+                        </button>
+                        
+                        <p class="text-center text-sm text-gray-500">
+                            Ili nas nazovite direktno: <a href="tel:+3859X XXX XXXX" class="text-solar-blue font-semibold">09X XXX XXXX</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-solar-blue text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 bg-solar-yellow rounded-xl flex items-center justify-center">
+                            <i data-lucide="sun" class="w-6 h-6 text-solar-blue"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-lg">SolarGlow</span>
+                            <span class="text-sm text-white/60 block -mt-1">Osijek</span>
+                        </div>
+                    </div>
+                    <p class="text-white/60 mb-4">
+                        Maksimalna energija iz svakog zraka sunca. 
+                        Vaš partner za čišćenje solarnih elektrana u Slavoniji.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Usluge</h4>
+                    <ul class="space-y-2 text-white/60">
+                        <li><a href="#usluge" class="hover:text-white transition-colors">Pranje panela</a></li>
+                        <li><a href="#usluge" class="hover:text-white transition-colors">Inspekcija</a></li>
+                        <li><a href="#usluge" class="hover:text-white transition-colors">Servis</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Brzi linkovi</h4>
+                    <ul class="space-y-2 text-white/60">
+                        <li><a href="#cjenik" class="hover:text-white transition-colors">Cjenik</a></li>
+                        <li><a href="#kontakt" class="hover:text-white transition-colors">Kontakt</a></li>
+                        <li><a href="tel:+3859X XXX XXXX" class="hover:text-white transition-colors">09X XXX XXXX</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/40 text-sm">
+                    © 2026 SolarGlow Osijek. Sva prava pridržana.
+                </p>
+                <p class="text-white/40 text-sm">
+                    Izrada web stranice: DECKART
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Mobile Menu Script -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
