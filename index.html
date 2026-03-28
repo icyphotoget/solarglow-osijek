@@ -1,1365 +1,691 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SolarGlow Osijek | Profesionalno pranje solarnih panela</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --sun: #F5A623;
-    --sun-bright: #FFD166;
-    --sun-dim: #C47D0E;
-    --dark: #FFFFFF;
-    --dark-2: #F5F7FA;
-    --dark-3: #E8ECF2;
-    --dark-4: #D1D5DE;
-    --muted: #6B7280;
-    --text: #1F2937;
-    --text-dim: #6B7280;
-    --white: #FAFAFA;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: #FFFFFF;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 48px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(10,10,11,0.7);
-    border-bottom: 1px solid rgba(245,166,35,0.08);
-    transition: padding 0.3s;
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.08em;
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  .nav-logo span { color: var(--sun); }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--sun); }
-
-  .nav-cta {
-    background: var(--sun);
-    color: var(--dark) !important;
-    padding: 10px 22px;
-    border-radius: 2px;
-    font-weight: 700 !important;
-    color: #000 !important;
-    transition: background 0.2s, transform 0.2s !important;
-  }
-
-  .nav-cta:hover { background: var(--sun-bright) !important; transform: translateY(-1px); }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
-    gap: 60px;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 70% 40%, rgba(245,166,35,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(245,166,35,0.05) 0%, transparent 60%);
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(245,166,35,0.1);
-    border: 1px solid rgba(245,166,35,0.25);
-    color: var(--sun);
-    font-family: 'Syne', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    border-radius: 100px;
-    margin-bottom: 28px;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--sun);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
-  }
-
-  .hero-content { position: relative; z-index: 1; }
-
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 7vw, 7rem);
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    color: var(--white);
-    margin-bottom: 28px;
-  }
-
-  .hero-title .accent { color: var(--sun); }
-
-  .hero-sub {
-    font-size: 1.05rem;
-    color: var(--text-dim);
-    max-width: 440px;
-    margin-bottom: 44px;
-    line-height: 1.75;
-  }
-
-  .hero-sub strong { color: var(--sun); font-weight: 500; }
-
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 60px;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--sun);
-    color: #000;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    padding: 16px 32px;
-    border-radius: 2px;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.15);
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-  }
-
-  .btn-primary:hover::after { transform: translateX(0); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(245,166,35,0.35); }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    padding: 16px 28px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 2px;
-    transition: all 0.25s;
-  }
-
-  .btn-ghost:hover { border-color: var(--sun); color: var(--sun); }
-
-  .hero-stats {
-    display: flex;
-    gap: 40px;
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.4rem;
-    color: var(--white);
-    letter-spacing: 0.03em;
-    line-height: 1;
-  }
-
-  .stat-num span { color: var(--sun); }
-
-  .stat-label {
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    margin-top: 4px;
-  }
-
-  /* ── HERO VISUAL ── */
-  .hero-visual {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .solar-illustration {
-    width: 100%;
-    max-width: 560px;
-    aspect-ratio: 1;
-    position: relative;
-  }
-
-  .solar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-    transform: perspective(800px) rotateX(12deg) rotateY(-8deg);
-    transform-style: preserve-3d;
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: perspective(800px) rotateX(12deg) rotateY(-8deg) translateY(0); }
-    50% { transform: perspective(800px) rotateX(12deg) rotateY(-8deg) translateY(-12px); }
-  }
-
-  .solar-panel {
-    background: linear-gradient(135deg, #0d1a2b 0%, #152744 50%, #0a1520 100%);
-    border: 1px solid rgba(245,166,35,0.2);
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .solar-panel::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    background:
-      repeating-linear-gradient(0deg, rgba(245,166,35,0.06) 0, rgba(245,166,35,0.06) 1px, transparent 1px, transparent 33.33%),
-      repeating-linear-gradient(90deg, rgba(245,166,35,0.06) 0, rgba(245,166,35,0.06) 1px, transparent 1px, transparent 33.33%);
-  }
-
-  .solar-panel.bright {
-    background: linear-gradient(135deg, #1a3a5c 0%, #224d7a 50%, #132b45 100%);
-    border-color: rgba(245,166,35,0.5);
-    box-shadow: 0 0 24px rgba(245,166,35,0.15), inset 0 0 30px rgba(245,166,35,0.05);
-  }
-
-  .solar-panel.bright::after {
-    content: '';
-    position: absolute;
-    top: -30%; left: -30%;
-    width: 60%; height: 60%;
-    background: radial-gradient(circle, rgba(245,166,35,0.3) 0%, transparent 70%);
-    animation: shimmer 3s ease-in-out infinite;
-  }
-
-  @keyframes shimmer {
-    0%, 100% { opacity: 0.4; transform: translate(0, 0); }
-    50% { opacity: 1; transform: translate(20%, 20%); }
-  }
-
-  /* glow ring */
-  .solar-illustration::before {
-    content: '';
-    position: absolute;
-    inset: -40px;
-    background: radial-gradient(circle at center, rgba(245,166,35,0.08) 0%, transparent 65%);
-    border-radius: 50%;
-    animation: glow-pulse 4s ease-in-out infinite;
-  }
-
-  @keyframes glow-pulse {
-    0%, 100% { opacity: 0.5; transform: scale(0.95); }
-    50% { opacity: 1; transform: scale(1.05); }
-  }
-
-  /* orbit dots */
-  .orbit {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 110%; height: 110%;
-    transform: translate(-50%, -50%);
-    border: 1px dashed rgba(245,166,35,0.15);
-    border-radius: 50%;
-    animation: spin 20s linear infinite;
-  }
-
-  .orbit::before {
-    content: '';
-    position: absolute;
-    top: -5px; left: 50%;
-    width: 10px; height: 10px;
-    background: var(--sun);
-    border-radius: 50%;
-    box-shadow: 0 0 12px var(--sun);
-    transform: translateX(-50%);
-  }
-
-  @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-
-  /* ── DIVIDER ── */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 0 48px;
-    margin: 0 0 80px;
-  }
-
-  .divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
-  .divider-text {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* ── SECTION ── */
-  section { padding: 100px 48px; position: relative; }
-
-  .section-tag {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sun);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-tag::before {
-    content: '';
-    width: 32px; height: 1px;
-    background: var(--sun);
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    color: var(--white);
-    letter-spacing: 0.02em;
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-
-  .section-sub {
-    color: var(--text-dim);
-    max-width: 560px;
-    font-size: 1rem;
-    line-height: 1.75;
-  }
-
-  /* ── WHY SECTION ── */
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 64px;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .why-card {
-    background: var(--dark-2);
-    padding: 44px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-
-  .why-card:hover { background: var(--dark-3); }
-
-  .why-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 2px; height: 0;
-    background: var(--sun);
-    transition: height 0.4s;
-  }
-
-  .why-card:hover::before { height: 100%; }
-
-  .why-icon {
-    width: 52px; height: 52px;
-    background: rgba(245,166,35,0.1);
-    border: 1px solid rgba(245,166,35,0.2);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    margin-bottom: 24px;
-  }
-
-  .why-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--white);
-    margin-bottom: 12px;
-    letter-spacing: 0.01em;
-  }
-
-  .why-card p {
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    line-height: 1.7;
-  }
-
-  .why-solution {
-    grid-column: 1 / -1;
-    background: linear-gradient(135deg, rgba(245,166,35,0.08) 0%, rgba(245,166,35,0.03) 100%);
-    border-top: 1px solid rgba(245,166,35,0.15);
-    display: flex;
-    align-items: center;
-    gap: 48px;
-  }
-
-  .why-solution-icon {
-    font-size: 3rem;
-    flex-shrink: 0;
-  }
-
-  .why-solution h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--white);
-    margin-bottom: 10px;
-  }
-
-  .why-solution p {
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    max-width: 600px;
-  }
-
-  /* ── SERVICES ── */
-  .services-bg { background: var(--dark-2); }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 64px;
-  }
-
-  .service-card {
-    background: #FFFFFF;
-    padding: 48px 40px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-
-  .service-card:hover { background: var(--dark-3); }
-
-  .service-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 5rem;
-    line-height: 1;
-    color: rgba(245,166,35,0.08);
-    position: absolute;
-    top: 20px; right: 28px;
-    letter-spacing: -0.02em;
-    transition: color 0.3s;
-  }
-
-  .service-card:hover .service-num { color: rgba(245,166,35,0.15); }
-
-  .service-icon {
-    font-size: 2rem;
-    margin-bottom: 28px;
-  }
-
-  .service-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--white);
-    margin-bottom: 14px;
-  }
-
-  .service-card p {
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    flex: 1;
-  }
-
-  .service-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--sun);
-    font-family: 'Syne', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    margin-top: 28px;
-    transition: gap 0.2s;
-  }
-
-  .service-link:hover { gap: 14px; }
-
-  /* ── PRICING ── */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 64px;
-  }
-
-  .price-card {
-    background: var(--dark-2);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s;
-  }
-
-  .price-card.featured {
-    background: var(--dark-3);
-    border: 1px solid rgba(245,166,35,0.25);
-    transform: translateY(-8px);
-  }
-
-  .price-card.featured::before {
-    content: 'NAJPOPULARNIJI';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    background: var(--sun);
-    color: #000;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-align: center;
-    padding: 8px;
-  }
-
-  .price-card.featured { padding-top: 56px; }
-
-  .price-tier {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sun);
-    margin-bottom: 8px;
-  }
-
-  .price-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--white);
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
-
-  .price-range {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 28px;
-  }
-
-  .price-amount {
-    margin-bottom: 32px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .price-amount .amount {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.5rem;
-    color: var(--white);
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
-
-  .price-amount .currency {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
-    color: var(--sun);
-    vertical-align: super;
-    font-weight: 700;
-  }
-
-  .price-amount .unit {
-    font-size: 0.8rem;
-    color: var(--muted);
-    display: block;
-    margin-top: 4px;
-  }
-
-  .price-features {
-    list-style: none;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 36px;
-  }
-
-  .price-features li {
-    font-size: 0.88rem;
-    color: var(--text-dim);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    line-height: 1.5;
-  }
-
-  .price-features li::before {
-    content: '→';
-    color: var(--sun);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* ── AREA ── */
-  .area-section {
-    background: var(--dark-2);
-  }
-
-  .area-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-top: 64px;
-  }
-
-  .area-map-placeholder {
-    background: var(--dark-3);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 4px;
-    height: 380px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .area-map-placeholder::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(245,166,35,0.08) 0%, transparent 60%);
-  }
-
-  .map-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    position: relative;
-  }
-
-  .area-cities {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 28px;
-  }
-
-  .city-tag {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-dim);
-    padding: 10px 14px;
-    background: var(--dark-3);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-
-  .city-tag:hover { border-color: rgba(245,166,35,0.3); color: var(--sun); }
-
-  .city-tag::before {
-    content: '◉';
-    color: var(--sun);
-    font-size: 0.5rem;
-  }
-
-  .free-zone {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(245,166,35,0.1);
-    border: 1px solid rgba(245,166,35,0.25);
-    color: var(--sun);
-    font-family: 'Syne', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 12px 20px;
-    border-radius: 2px;
-    margin-top: 24px;
-  }
-
-  /* ── CONTACT ── */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 5fr 4fr;
-    gap: 80px;
-    align-items: start;
-    margin-top: 64px;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .form-group label {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: var(--dark-2);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    padding: 14px 18px;
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-
-  .form-group select { cursor: pointer; }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--sun);
-    background: var(--dark-3);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .form-checkbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 16px;
-    background: var(--dark-2);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 2px;
-    cursor: pointer;
-  }
-
-  .form-checkbox input { width: 16px; height: 16px; accent-color: var(--sun); flex-shrink: 0; margin-top: 2px; cursor: pointer; }
-  .form-checkbox span { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
-
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: sticky;
-    top: 100px;
-  }
-
-  .info-card {
-    padding: 28px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .info-card:first-child { padding-top: 0; }
-
-  .info-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .info-value {
-    font-size: 1rem;
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .info-value:hover { color: var(--sun); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--dark-2);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 60px 48px 40px;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 60px;
-  }
-
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    letter-spacing: 0.08em;
-    color: var(--white);
-    margin-bottom: 14px;
-    display: block;
-  }
-
-  .footer-logo span { color: var(--sun); }
-
-  .footer-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 280px;
-  }
-
-  .footer-col h4 {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sun);
-    margin-bottom: 20px;
-  }
-
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-col ul a {
-    font-size: 0.88rem;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-col ul a:hover { color: var(--text); }
-
-  .footer-bottom {
-    grid-column: 1 / -1;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-bottom p {
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
-
-  /* ── ANIMATIONS ── */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── MOBILE ── */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
-    .hero-visual { display: none; }
-    section { padding: 70px 24px; }
-    .why-grid { grid-template-columns: 1fr; }
-    .why-solution { flex-direction: column; gap: 20px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .price-card.featured { transform: none; }
-    .area-content { grid-template-columns: 1fr; gap: 40px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 32px; }
-    .divider { padding: 0 24px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarGlow Osijek | Profesionalno pranje solarnih panela u Slavoniji</title>
+    <meta name="description" content="Povećajte prinos vaše solarne elektrane. Nudimo stručno čišćenje solarnih panela u Osijeku i okolici. Cijene već od 60€.">
+    <meta name="keywords" content="pranje solarnih panela, solarna energija, Osijek, Slavonija, čišćenje panela, solarne elektrane">
+    <meta name="author" content="SolarGlow Osijek">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SolarGlow Osijek | Profesionalno pranje solarnih panela">
+    <meta property="og:description" content="Povećajte prinos vaše solarne elektrane. Stručno čišćenje u Osijeku i okolici.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="hr_HR">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'solar-blue': '#1A365D',
+                        'solar-yellow': '#F6AD55',
+                        'solar-orange': '#ED8936',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-
-<!-- ── NAV ── -->
-<nav>
-  <a href="#" class="nav-logo">Solar<span>Glow</span> Osijek</a>
-  <ul class="nav-links">
-    <li><a href="#usluge">Usluge</a></li>
-    <li><a href="#cjenik">Cjenik</a></li>
-    <li><a href="#podrucje">Područje</a></li>
-    <li><a href="#kontakt" class="nav-cta">Besplatna procjena</a></li>
-  </ul>
-</nav>
-
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-bg"></div>
-
-  <div class="hero-content fade-up">
-    <div class="hero-badge">Osijek & Slavonija</div>
-    <h1 class="hero-title">
-      Maksimalna<br>
-      <span class="accent">energija</span><br>
-      iz svakog panela
-    </h1>
-    <p class="hero-sub">
-      Profesionalno pranje demineraliziranom vodom povećava učinkovitost vaših solarnih panela <strong>do 30%</strong>. Brzo, sigurno i povoljno u Osijeku i okolici.
-    </p>
-    <div class="hero-actions">
-      <a href="#kontakt" class="btn-primary">Besplatna procjena →</a>
-      <a href="tel:+38509XXXXXXX" class="btn-ghost">📞 09X XXX XXXX</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">500<span>+</span></div>
-        <div class="stat-label">Panela očišćeno</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">30<span>%</span></div>
-        <div class="stat-label">Više energije</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">5.0<span>★</span></div>
-        <div class="stat-label">Ocjena kupaca</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-visual fade-up">
-    <div class="solar-illustration">
-      <div class="orbit"></div>
-      <div class="solar-grid">
-        <div class="solar-panel"></div>
-        <div class="solar-panel bright"></div>
-        <div class="solar-panel"></div>
-        <div class="solar-panel bright"></div>
-        <div class="solar-panel bright"></div>
-        <div class="solar-panel"></div>
-        <div class="solar-panel"></div>
-        <div class="solar-panel bright"></div>
-        <div class="solar-panel"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── WHY ── -->
-<section id="zasto">
-  <div class="section-tag">Zašto čistiti panele</div>
-  <h2 class="section-title">Pelud i prašina kradu vašu energiju</h2>
-  <p class="section-sub">Kiša nije dovoljna. Mikročestice stvaraju nevidljivu barijeru koja smanjuje prinos vaše elektrane svaki dan.</p>
-
-  <div class="why-grid fade-up">
-    <div class="why-card">
-      <div class="why-icon">🌿</div>
-      <h3>Pelud i prašina</h3>
-      <p>Mikroskopske čestice talože se na površini i smanjuju propusnost svjetlosti do 20% — a kiša ih ne može isprati.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🐦</div>
-      <h3>Ptičji izmet</h3>
-      <p>Kiseline mogu oštetiti zaštitni sloj panela ako se ne uklone pravovremeno. Svaki dan čekanja = trošak.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🏭</div>
-      <h3>Čađa i smog</h3>
-      <p>Industrijske čestice i smog talože se kao trajni sloj koji godišnje uzima znatan postotak vaše produkcije.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">⏱️</div>
-      <h3>Dugoročno oštećenje</h3>
-      <p>Nečistoće zadržavaju toplinu i ubrzavaju degradaciju ćelija. Redovno pranje produžava životni vijek panela.</p>
-    </div>
-    <div class="why-card why-solution">
-      <div class="why-solution-icon">💧</div>
-      <div>
-        <h3>Rješenje: Demineralizirana voda + profesionalna oprema</h3>
-        <p>Koristimo posebnu vodu bez minerala koja ne ostavlja tragove i isušuje se bez ostataka. Paneli ostaju čisti dulje i rade na maksimalnom kapacitetu — bez rizika od oštećenja.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SERVICES ── -->
-<section id="usluge" class="services-bg">
-  <div class="section-tag">Što nudimo</div>
-  <h2 class="section-title">Naše usluge</h2>
-  <p class="section-sub">Sveobuhvatno rješenje za održavanje vaše solarne elektrane — od čišćenja do servisa.</p>
-
-  <div class="services-grid fade-up">
-    <div class="service-card">
-      <div class="service-num">01</div>
-      <div class="service-icon">🧼</div>
-      <h3>Pranje solarnih panela</h3>
-      <p>Demineralizirana voda i profesionalna oprema za optimalne rezultate bez oštećenja površine ili zaštitnih slojeva.</p>
-      <a href="#kontakt" class="service-link">Rezerviraj →</a>
-    </div>
-    <div class="service-card">
-      <div class="service-num">02</div>
-      <div class="service-icon">🔍</div>
-      <h3>Pregled i inspekcija</h3>
-      <p>Vizualni pregled svih panela uz mogućnost korištenja drona za detaljnu inspekciju krovova i teže dostupnih mjesta.</p>
-      <a href="#kontakt" class="service-link">Rezerviraj →</a>
-    </div>
-    <div class="service-card">
-      <div class="service-num">03</div>
-      <div class="service-icon">⚡</div>
-      <h3>Servis elektrike</h3>
-      <p>Provjera i popravak električnih komponenti, kablova i invertera. Osiguravamo da cijeli sustav radi optimalno.</p>
-      <a href="#kontakt" class="service-link">Rezerviraj →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── PRICING ── -->
-<section id="cjenik">
-  <div class="section-tag">Transparentne cijene</div>
-  <h2 class="section-title">Bez skrivenih troškova</h2>
-  <p class="section-sub">Odaberite paket koji odgovara vašoj elektrani. Fiksna cijena, garantirani rezultat.</p>
-
-  <div class="pricing-grid fade-up">
-    <div class="price-card">
-      <div class="price-tier">Za kućanstva</div>
-      <div class="price-name">S-Paket</div>
-      <div class="price-range">do 12 panela</div>
-      <div class="price-amount">
-        <div><span class="currency">€</span><span class="amount">60</span></div>
-        <span class="unit">fiksna cijena</span>
-      </div>
-      <ul class="price-features">
-        <li>Pranje do 12 panela</li>
-        <li>Demineralizirana voda</li>
-        <li>Besplatan dolazak (20 km)</li>
-        <li>Garantirani rezultat</li>
-      </ul>
-      <a href="#kontakt" class="btn-ghost" style="text-align:center; justify-content:center; font-size:0.82rem; padding:13px;">Rezerviraj S-Paket</a>
-    </div>
-
-    <div class="price-card featured">
-      <div class="price-tier">Najpopularniji</div>
-      <div class="price-name">M-Paket</div>
-      <div class="price-range">13 – 30 panela</div>
-      <div class="price-amount">
-        <div><span class="currency">€</span><span class="amount">5</span></div>
-        <span class="unit">po panelu · (redovna cijena 6€)</span>
-      </div>
-      <ul class="price-features">
-        <li>Pranje po panelu</li>
-        <li>Demineralizirana voda</li>
-        <li>Popust na količinu</li>
-        <li>Idealno za veće krovove</li>
-      </ul>
-      <a href="#kontakt" class="btn-primary" style="text-align:center; justify-content:center; font-size:0.82rem; padding:13px;">Rezerviraj M-Paket</a>
-    </div>
-
-    <div class="price-card">
-      <div class="price-tier">OPG & Hale</div>
-      <div class="price-name">L-Paket</div>
-      <div class="price-range">30+ panela</div>
-      <div class="price-amount">
-        <div><span class="currency">€</span><span class="amount">3.50</span></div>
-        <span class="unit">po panelu · najbolja cijena</span>
-      </div>
-      <ul class="price-features">
-        <li>Pranje 30+ panela</li>
-        <li>Demineralizirana voda</li>
-        <li>Za OPG-ove i hale</li>
-        <li>Posebni uvjeti</li>
-      </ul>
-      <a href="#kontakt" class="btn-ghost" style="text-align:center; justify-content:center; font-size:0.82rem; padding:13px;">Rezerviraj L-Paket</a>
-    </div>
-  </div>
-
-  <p style="text-align:center; color:var(--muted); font-size:0.85rem; margin-top:32px;">
-    <span style="color:var(--sun)">●</span> &nbsp;Besplatan dolazak u krugu od 20 km od Osijeka &nbsp;·&nbsp; Za lokacije dalje, nazovite za ponudu.
-  </p>
-</section>
-
-<!-- ── AREA ── -->
-<section id="podrucje" class="area-section">
-  <div class="section-tag">Gdje smo dostupni</div>
-  <h2 class="section-title">Cijela Osječko-baranjska županija</h2>
-  <p class="section-sub">Od grada do ruralnih područja — stižemo do vas gdje god se nalazila vaša solarna elektrana.</p>
-
-  <div class="area-content fade-up">
-    <div>
-      <div class="area-cities">
-        <div class="city-tag">Osijek</div>
-        <div class="city-tag">Čepin</div>
-        <div class="city-tag">Đakovo</div>
-        <div class="city-tag">Valpovo</div>
-        <div class="city-tag">Belišće</div>
-        <div class="city-tag">Retfala</div>
-        <div class="city-tag">Jug 2</div>
-        <div class="city-tag">Nemetin</div>
-        <div class="city-tag">Tenja</div>
-        <div class="city-tag">Višnjevac</div>
-      </div>
-      <div class="free-zone">
-        ⚡ Besplatan dolazak — 20 km od Osijeka
-      </div>
-    </div>
-
-    <div class="area-map-placeholder">
-      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(245,166,35,0.4)" stroke-width="1.5">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-        <circle cx="12" cy="10" r="3"/>
-      </svg>
-      <span class="map-label">Osječko-baranjska županija</span>
-      <span style="font-size:0.75rem; color:var(--muted);">Karta dostupnosti</span>
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section id="kontakt">
-  <div class="section-tag">Kontaktirajte nas</div>
-  <h2 class="section-title">Besplatna procjena</h2>
-  <p class="section-sub">Ispunite obrazac i javit ćemo vam se u roku od 24 sata s ponudom prilagođenom vašim potrebama.</p>
-
-  <div class="contact-grid fade-up">
-    <form class="contact-form" onsubmit="return false;">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Ime i prezime *</label>
-          <input type="text" placeholder="Marko Horvat">
+<body class="font-inter bg-white text-gray-800">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-solar-blue to-solar-yellow rounded-xl flex items-center justify-center">
+                        <i data-lucide="sun" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg text-solar-blue">SolarGlow</span>
+                        <span class="text-sm text-gray-500 block -mt-1">Osijek</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#usluge" class="text-gray-600 hover:text-solar-blue font-medium transition-colors">Usluge</a>
+                    <a href="#cjenik" class="text-gray-600 hover:text-solar-blue font-medium transition-colors">Cjenik</a>
+                    <a href="#kontakt" class="text-gray-600 hover:text-solar-blue font-medium transition-colors">Kontakt</a>
+                    <a href="tel:+3859X XXX XXXX" class="bg-solar-blue text-white px-5 py-2.5 rounded-full font-semibold hover:bg-solar-blue/90 transition-colors flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        Nazovi: 09X XXX XXXX
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-solar-blue">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Telefon *</label>
-          <input type="tel" placeholder="09X XXX XXXX">
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#usluge" class="block text-gray-600 hover:text-solar-blue font-medium py-2">Usluge</a>
+                <a href="#cjenik" class="block text-gray-600 hover:text-solar-blue font-medium py-2">Cjenik</a>
+                <a href="#kontakt" class="block text-gray-600 hover:text-solar-blue font-medium py-2">Kontakt</a>
+                <a href="tel:+3859X XXX XXXX" class="block bg-solar-blue text-white px-5 py-3 rounded-full font-semibold text-center">
+                    Nazovi: 09X XXX XXXX
+                </a>
+            </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="marko@email.com">
-      </div>
-      <div class="form-group">
-        <label>Broj panela *</label>
-        <select>
-          <option value="">Odaberite paket...</option>
-          <option>1–12 panela (S-Paket)</option>
-          <option>13–30 panela (M-Paket)</option>
-          <option>31+ panela (L-Paket)</option>
-          <option>Ne znam / Trebam savjet</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Poruka</label>
-        <textarea placeholder="Lokacija, posebni uvjeti, pitanja..."></textarea>
-      </div>
-      <label class="form-checkbox">
-        <input type="checkbox">
-        <span>Slažem se s obradom osobnih podataka u svrhu kontakta i ponude.</span>
-      </label>
-      <button type="submit" class="btn-primary" style="border:none; cursor:pointer; font-size:0.9rem; padding:18px 32px; width:100%; justify-content:center;">
-        Pošalji upit →
-      </button>
-    </form>
-
-    <div class="contact-info">
-      <div class="info-card">
-        <div class="info-label">Telefon</div>
-        <a href="tel:+38509XXXXXXX" class="info-value">09X XXX XXXX</a>
-      </div>
-      <div class="info-card">
-        <div class="info-label">Email</div>
-        <a href="mailto:info@solarglow-osijek.hr" class="info-value">info@solarglow-osijek.hr</a>
-      </div>
-      <div class="info-card">
-        <div class="info-label">Lokacija</div>
-        <span class="info-value">Osijek, Osječko-baranjska županija</span>
-      </div>
-      <div class="info-card">
-        <div class="info-label">Radno vrijeme</div>
-        <span class="info-value">Pon – Sub: 7:00 – 19:00</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
-<footer>
-  <div>
-    <span class="footer-logo">Solar<span>Glow</span> Osijek</span>
-    <p class="footer-desc">Maksimalna energija iz svakog zraka sunca. Vaš partner za čišćenje solarnih elektrana u Slavoniji.</p>
-  </div>
-
-  <div class="footer-col">
-    <h4>Usluge</h4>
-    <ul>
-      <li><a href="#usluge">Pranje panela</a></li>
-      <li><a href="#usluge">Inspekcija</a></li>
-      <li><a href="#usluge">Servis</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-col">
-    <h4>Brzi linkovi</h4>
-    <ul>
-      <li><a href="#cjenik">Cjenik</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
-      <li><a href="tel:+38509XXXXXXX">09X XXX XXXX</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 SolarGlow Osijek. Sva prava pridržana.</p>
-    <p>Izrada: DECKART</p>
-  </div>
-</footer>
-
-<script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        // stagger children
-        const children = entry.target.querySelectorAll('.why-card, .service-card, .price-card, .city-tag');
-        children.forEach((el, i) => {
-          el.style.transitionDelay = `${i * 80}ms`;
-          el.classList.add('visible');
-        });
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach(el => {
-    observer.observe(el);
-    el.querySelectorAll('.why-card, .service-card, .price-card, .city-tag').forEach(child => {
-      child.classList.add('fade-up');
-    });
-  });
-
-  // Nav shrink on scroll
-  window.addEventListener('scroll', () => {
-    document.querySelector('nav').style.padding =
-      window.scrollY > 40 ? '14px 48px' : '20px 48px';
-  });
-</script>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-solar-blue via-solar-blue/95 to-solar-blue/90"></div>
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 right-10 w-96 h-96 bg-solar-yellow rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                        <i data-lucide="zap" class="w-4 h-4 text-solar-yellow"></i>
+                        <span class="text-sm font-medium">Maksimalna energija iz svakog zraka sunca</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                        Vratite snagu svojoj solarnoj elektrani u srcu <span class="text-solar-yellow">Slavonije</span>.
+                    </h1>
+                    
+                    <p class="text-xl text-white/80 mb-8 leading-relaxed">
+                        Profesionalno pranje demineraliziranom vodom povećava učinkovitost vaših panela <strong class="text-solar-yellow">do 30%</strong>. Brzo, sigurno i povoljno u Osijeku i okolici.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#kontakt" class="inline-flex items-center gap-2 bg-solar-yellow text-solar-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-solar-orange transition-colors shadow-lg shadow-solar-yellow/30">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            Besplatna procjena
+                        </a>
+                        <a href="tel:+3859X XXX XXXX" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors border border-white/20">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                            09X XXX XXXX
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-8 mt-12 pt-8 border-t border-white/20">
+                        <div>
+                            <div class="text-3xl font-bold text-solar-yellow">500+</div>
+                            <div class="text-sm text-white/60">Panel-a očišćeno</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-solar-yellow">30%</div>
+                            <div class="text-sm text-white/60">Više energije</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-solar-yellow">5.0 ★</div>
+                            <div class="text-sm text-white/60">Ocjena kupaca</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block relative">
+                    <!-- Placeholder for solar panel image -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                        <div class="aspect-square bg-gradient-to-br from-white/20 to-white/5 rounded-2xl flex items-center justify-center">
+                            <div class="text-center">
+                                <i data-lucide="sun" class="w-32 h-32 text-solar-yellow mx-auto mb-4"></i>
+                                <p class="text-white/60 text-sm">[SLIKA: Solarni paneli na krovu]</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 bg-solar-yellow rounded-full border-2 border-solar-blue"></div>
+                                <div class="w-8 h-8 bg-solar-orange rounded-full border-2 border-solar-blue"></div>
+                                <div class="w-8 h-8 bg-yellow-300 rounded-full border-2 border-solar-blue"></div>
+                            </div>
+                            <p class="text-white/80 text-sm">100+ zadovoljnih klijenata u Osijeku</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem / Solution Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-4">
+                    Zašto prati panele?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Pelud, prašina i ptičji izmet stvaraju barijeru koju kiša ne može isprati
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Problem Card 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="droplets" class="w-7 h-7 text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Pelud i prašina</h3>
+                    <p class="text-gray-600">Mikroskopske čestice talože se na površini i smanjuju propusnost svjetlosti do 20%.</p>
+                </div>
+                
+                <!-- Problem Card 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="bird" class="w-7 h-7 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Ptičji izmet</h3>
+                    <p class="text-gray-600">Kiseline iz ptičjeg izmeta mogu oštetiti zaštitni sloj panela ako se ne ukloni pravovremeno.</p>
+                </div>
+                
+                <!-- Problem Card 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="cloud-rain" class="w-7 h-7 text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Čađa i smog</h3>
+                    <p class="text-gray-600">Industrijske čestice i smog iz zraka talože se i stvaraju trajni sloj koji smanjuje efikasnost.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-gradient-to-r from-solar-blue to-solar-blue/90 rounded-3xl p-8 md:p-12 text-white text-center">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4">
+                    Rješenje: Profesionalno čišćenje demineraliziranom vodom
+                </h3>
+                <p class="text-white/80 text-lg max-w-3xl mx-auto mb-8">
+                    Koristimo posebnu vodu bez minerala koja ne ostavlja tragove i isušuje se bez ostataka. 
+                    Paneli ostaju čisti dulje i rade na maksimalnom kapacitetu.
+                </p>
+                <a href="#kontakt" class="inline-flex items-center gap-2 bg-solar-yellow text-solar-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-solar-orange transition-colors">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    Rezervirajte termin
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="usluge" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-4">
+                    Naše usluge
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Nudimo sveobuhvatno rješenje za održavanje vaših solarnih elektrana
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-2xl w-full h-48 flex items-center justify-center mb-6">
+                        <div class="text-center text-gray-500">
+                            <i data-lucide="sparkles" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                            <p class="text-sm">[SLIKA: Čišćenje panela]</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pranje solarnih panela</h3>
+                    <p class="text-gray-600">Koristimo demineraliziranu vodu i profesionalnu opremu za optimalne rezultate bez oštećenja.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="group">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-2xl w-full h-48 flex items-center justify-center mb-6">
+                        <div class="text-center text-gray-500">
+                            <i data-lucide="check-circle" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                            <p class="text-sm">[SLIKA: Inspekcija drona]</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pregled i inspekcija</h3>
+                    <p class="text-gray-600">Vizualni pregled svih panela uz mogućnost korištenja drona za detaljnu inspekciju krovova.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="group">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-2xl w-full h-48 flex items-center justify-center mb-6">
+                        <div class="text-center text-gray-500">
+                            <i data-lucide="wrench" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                            <p class="text-sm">[SLIKA: Električar]</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Servis elektrike</h3>
+                    <p class="text-gray-600">Provjera i popravak električnih komponenti, kablova i invertera u sustavu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="cjenik" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-4">
+                    Cjenik
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Transparentne cijene bez skrivenih troškova
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- S Paket -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-gray-100 overflow-hidden hover:border-solar-blue transition-colors">
+                    <div class="bg-gray-100 px-6 py-4 text-center">
+                        <span class="inline-block bg-solar-blue text-white text-sm font-bold px-4 py-1 rounded-full">ZA KUĆANSTVA</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-4">S-Paket</h3>
+                        <p class="text-gray-500">do 12 panela</p>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-5xl font-bold text-solar-blue mb-2">60€</div>
+                        <p class="text-gray-500 mb-6">Fiksna cijena</p>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Pranje do 12 panela</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Demineralizirana voda</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Besplatan dolazak (20 km)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Garantirani rezultat</span>
+                            </li>
+                        </ul>
+                        <a href="#kontakt" class="block w-full bg-solar-blue text-white py-3 rounded-full font-semibold hover:bg-solar-blue/90 transition-colors">
+                            Rezerviraj S-Paket
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- M Paket - Popular -->
+                <div class="bg-white rounded-3xl shadow-xl border-4 border-solar-yellow relative overflow-hidden transform md:-translate-y-4">
+                    <div class="absolute top-0 right-0 bg-solar-yellow text-solar-blue text-xs font-bold px-4 py-2 rounded-bl-lg">
+                        NAJPOPULARNIJI
+                    </div>
+                    <div class="bg-gradient-to-r from-solar-yellow to-solar-orange px-6 py-4 text-center">
+                        <h3 class="text-2xl font-bold text-white mt-2">M-Paket</h3>
+                        <p class="text-white/80">13 - 30 panela</p>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-5xl font-bold text-solar-blue mb-2">5€</div>
+                        <p class="text-gray-500 mb-1">po panelu</p>
+                        <p class="text-sm text-gray-400 line-through mb-6">6€ po panelu</p>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Pranje po panelu</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Demineralizirana voda</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Popust na količinu</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Idealno za veće krovove</span>
+                            </li>
+                        </ul>
+                        <a href="#kontakt" class="block w-full bg-solar-yellow text-solar-blue py-3 rounded-full font-bold hover:bg-solar-orange transition-colors">
+                            Rezerviraj M-Paket
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- L Paket -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-gray-100 overflow-hidden hover:border-solar-blue transition-colors">
+                    <div class="bg-gradient-to-r from-solar-blue to-solar-blue/80 px-6 py-4 text-center">
+                        <span class="inline-block bg-white text-solar-blue text-sm font-bold px-4 py-1 rounded-full">OPG & HALE</span>
+                        <h3 class="text-2xl font-bold text-white mt-4">L-Paket</h3>
+                        <p class="text-white/80">30+ panela</p>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-5xl font-bold text-solar-blue mb-2">3.50€</div>
+                        <p class="text-gray-500 mb-6">po panelu</p>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Pranje 30+ panela</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Najbolja cijena</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Za OPG-ove i hale</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span>Posebni uvjeti</span>
+                            </li>
+                        </ul>
+                        <a href="#kontakt" class="block w-full bg-solar-blue text-white py-3 rounded-full font-semibold hover:bg-solar-blue/90 transition-colors">
+                            Rezerviraj L-Paket
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Free Delivery Notice -->
+            <div class="mt-12 bg-green-50 border border-green-200 rounded-2xl p-6 text-center max-w-3xl mx-auto">
+                <div class="flex items-center justify-center gap-3">
+                    <i data-lucide="truck" class="w-6 h-6 text-green-600"></i>
+                    <p class="text-green-800 font-medium">
+                        <strong>Besplatan dolazak</strong> u krugu od 20 km od Osijeka. 
+                        Za lokacije dalje, molimo nazovite za ponudu.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Local SEO Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-solar-blue to-solar-blue/95 rounded-3xl p-8 md:p-12 text-white">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">
+                            Servisiramo područje cijele Osječko-baranjske županije
+                        </h2>
+                        <p class="text-white/80 text-lg mb-8">
+                            Bez obzira gdje se nalazi vaša solarna elektrana, stići ćemo do vas. 
+                            Od grada do ruralnih područja – slove se našoj stručnoj ekipi.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Osijek</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Čepin</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Đakovo</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Valpovo</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Belišće</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Retfala</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Jug 2</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Nemetin</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Tenja</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-solar-yellow"></i>
+                                <span>Višnjevac</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+                            <div class="text-center text-white/60">
+                                <i data-lucide="map" class="w-16 h-16 mx-auto mb-2 opacity-50"></i>
+                                <p>[KARTA: Područje servisa SolarGlow Osijek]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section id="kontakt" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-solar-blue mb-6">
+                        Rezervirajte besplatnu procjenu
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Ispunite obrazac i javit ćemo vam se u roku od 24 sata s ponudom prilagođenom vašim potrebama.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Telefon</h4>
+                                <a href="tel:+3859X XXX XXXX" class="text-solar-blue hover:underline">09X XXX XXXX</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Email</h4>
+                                <a href="mailto:info@solarglow-osijek.hr" class="text-solar-blue hover:underline">info@solarglow-osijek.hr</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Lokacija</h4>
+                                <p class="text-gray-600">Osijek, Osječko-baranjska županija</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-solar-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6 text-solar-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Radno vrijeme</h4>
+                                <p class="text-gray-600">Pon – Sub: 7:00 – 19:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="ime" class="block text-sm font-medium text-gray-700 mb-2">Ime i prezime *</label>
+                            <input 
+                                type="text" 
+                                id="ime" 
+                                name="ime" 
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                                placeholder="Vaše ime i prezime"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="telefon" class="block text-sm font-medium text-gray-700 mb-2">Telefon *</label>
+                            <input 
+                                type="tel" 
+                                id="telefon" 
+                                name="telefon" 
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                                placeholder="09X XXX XXXX"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                                placeholder="vas@email.com"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="paneli" class="block text-sm font-medium text-gray-700 mb-2">Broj panela *</label>
+                            <select 
+                                id="paneli" 
+                                name="paneli" 
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors"
+                            >
+                                <option value="">Odaberite...</option>
+                                <option value="1-12">1-12 panela (S-Paket)</option>
+                                <option value="13-30">13-30 panela (M-Paket)</option>
+                                <option value="31+">31+ panela (L-Paket)</option>
+                                <option value="neznam">Ne znam / Trebam savjet</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="poruka" class="block text-sm font-medium text-gray-700 mb-2">Poruka</label>
+                            <textarea 
+                                id="poruka" 
+                                name="poruka" 
+                                rows="4"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-solar-blue focus:border-solar-blue transition-colors resize-none"
+                                placeholder="Opišite vašu situaciju, lokaciju, ili postavite pitanje..."
+                            ></textarea>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <input 
+                                type="checkbox" 
+                                id="privola" 
+                                name="privola" 
+                                required
+                                class="mt-1 w-5 h-5 text-solar-blue rounded border-gray-300 focus:ring-solar-blue"
+                            >
+                            <label for="privola" class="text-sm text-gray-600">
+                                Slažem se s obradom osobnih podataka u svrhu kontakta i ponude. *
+                            </label>
+                        </div>
+                        
+                        <button 
+                            type="submit"
+                            class="w-full bg-solar-blue text-white py-4 rounded-xl font-bold text-lg hover:bg-solar-blue/90 transition-colors flex items-center justify-center gap-2"
+                        >
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            Pošalji upit
+                        </button>
+                        
+                        <p class="text-center text-sm text-gray-500">
+                            Ili nas nazovite direktno: <a href="tel:+3859X XXX XXXX" class="text-solar-blue font-semibold">09X XXX XXXX</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-solar-blue text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 bg-solar-yellow rounded-xl flex items-center justify-center">
+                            <i data-lucide="sun" class="w-6 h-6 text-solar-blue"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-lg">SolarGlow</span>
+                            <span class="text-sm text-white/60 block -mt-1">Osijek</span>
+                        </div>
+                    </div>
+                    <p class="text-white/60 mb-4">
+                        Maksimalna energija iz svakog zraka sunca. 
+                        Vaš partner za čišćenje solarnih elektrana u Slavoniji.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Usluge</h4>
+                    <ul class="space-y-2 text-white/60">
+                        <li><a href="#usluge" class="hover:text-white transition-colors">Pranje panela</a></li>
+                        <li><a href="#usluge" class="hover:text-white transition-colors">Inspekcija</a></li>
+                        <li><a href="#usluge" class="hover:text-white transition-colors">Servis</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Brzi linkovi</h4>
+                    <ul class="space-y-2 text-white/60">
+                        <li><a href="#cjenik" class="hover:text-white transition-colors">Cjenik</a></li>
+                        <li><a href="#kontakt" class="hover:text-white transition-colors">Kontakt</a></li>
+                        <li><a href="tel:+3859X XXX XXXX" class="hover:text-white transition-colors">09X XXX XXXX</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/40 text-sm">
+                    © 2026 SolarGlow Osijek. Sva prava pridržana.
+                </p>
+                <p class="text-white/40 text-sm">
+                    Izrada web stranice: DECKART
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Mobile Menu Script -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
